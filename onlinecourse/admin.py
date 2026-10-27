@@ -13,7 +13,13 @@ class QuestionInline(admin.StackedInline):
     extra = 2
 
 
+class LessonInline(admin.StackedInline):
+    model = Lesson
+    extra = 1
+
+
 class CourseAdmin(admin.ModelAdmin):
+    inlines = [LessonInline]
     list_display = ('name', 'description')
     search_fields = ('name',)
 

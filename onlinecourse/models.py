@@ -39,7 +39,7 @@ class Lesson(models.Model):
 class Question(models.Model):
     lesson = models.ForeignKey('Lesson', on_delete=models.CASCADE, related_name='questions', null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='questions', null=True, blank=True)
-    question_text = models.CharField(max_length=500)
+    question_text = models.CharField(max_length=200)
     grade = models.IntegerField(default=1)
     order = models.IntegerField(default=1)
 
@@ -51,13 +51,13 @@ class Question(models.Model):
 
     def is_get_score(self, selected_choice=None):
         if selected_choice is None:
-            return self.grade
+            return 0
         return self.grade if selected_choice.is_correct else 0
 
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='choices')
-    choice_text = models.CharField(max_length=200)
+    choice_text = models.CharField(max_length=100)
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
@@ -82,4 +82,4 @@ class Submission(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.enrollment.course.name} - {self.score}/{self.total_questions}'
+        return f'{self.enrollment.learner.name} - {self.score}/{self.total_questions}'
