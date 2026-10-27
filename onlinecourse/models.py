@@ -82,4 +82,4 @@ class Submission(models.Model):
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.enrollment.learner.name} - {self.score}/{self.total_questions}'
+        return f'Submission {self.id} - Enrollment {self.enrollment_id}'

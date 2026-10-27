@@ -15,7 +15,7 @@
 
                 <h2 class="mt-4">Course Lessons</h2>
                 <ul class="list-group mb-4">
-                    {% for lesson in course.lessons.all %}
+                    {% for lesson in lessons %}
                         <li class="list-group-item">
                             <strong>{{ lesson.title }}</strong>
                             <div class="text-muted">{{ lesson.content }}</div>
